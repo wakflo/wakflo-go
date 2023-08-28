@@ -1,0 +1,37 @@
+name: "Release"
+
+permissions:
+  id-token: write # Enable OIDC
+  pull-requests: write
+  contents: write
+  packages: write
+  issues: write
+
+on:
+  release:
+    types: [created]
+#  push:
+#    tags:
+#      - '*'
+
+jobs:
+  printJob:
+    name: Print event
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+
+
+  printScriptJob:
+    name: Print event with script
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        uses: actions/github-script@v6
+        with:
+          script: |
+            console.log(context)

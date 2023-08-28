@@ -1,0 +1,88 @@
+name: Test and Lint
+
+permissions:
+  id-token: write # Enable OIDC
+  pull-requests: write
+  contents: write
+  packages: write
+  issues: write
+on:
+  push:
+    branches: []
+  pull_request:
+    branches: []
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.20.x
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          # In order:
+          # * Module download cache
+          # * Build cache (Linux)
+          # * Build cache (Mac)
+          # * Build cache (Windows)
+          path: |
+            ~/go/pkg/mod
+            ~/.cache/go-build
+            ~/Library/Caches/go-build
+            ~\AppData\Local\go-build
+          key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-${{ matrix.go-version }}-
+      - run: go vet ./...
+      - name: golangci-lint
+        uses: reviewdog/action-golangci-lint@v2
+
+  test:
+    runs-on: ubuntu-latest
+    needs:
+      - lint
+    steps:
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.20.x
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          # In order:
+          # * Module download cache
+          # * Build cache (Linux)
+          # * Build cache (Mac)
+          # * Build cache (Windows)
+          path: |
+            ~/go/pkg/mod
+            ~/.cache/go-build
+            ~/Library/Caches/go-build
+            ~\AppData\Local\go-build
+          key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-${{ matrix.go-version }}-
+      - run: go test ./...
+
+  prerelease:
+    runs-on: ubuntu-latest
+    needs:
+      - lint
+      - test
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run Release
+      uses: google-github-actions/release-please-action@v3
+      with:
+        release-type: go
+        package-name: armado
+        default-branch: main
+        signoff: "xraph <rex@wakflo.com>"
+        token: ${{ secrets.GIT_RELEASE_TOKEN }} # <-- PAT secret name
