@@ -82,7 +82,7 @@ jobs:
       uses: google-github-actions/release-please-action@v3
       with:
         release-type: go
-        package-name: armado
+        package-name: wakflo-go
         default-branch: main
         signoff: "xraph <rex@wakflo.com>"
         token: ${{ secrets.GIT_RELEASE_TOKEN }} # <-- PAT secret name
