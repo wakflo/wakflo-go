@@ -1,3 +1,3 @@
-module github.com/wakflo/wakflo-go/v1
+module github.com/wakflo/wakflo-go
 
 go 1.20
