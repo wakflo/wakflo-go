@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/wakflo/wakflo-go/sdk/v1"
+	"github.com/wakflo/wakflo-go/sdk"
 )
 
 // MainExecute .
