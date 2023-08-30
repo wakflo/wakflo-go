@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/wakflo/wakflo-go/compare/v1.0.1...v1.0.2) (2023-08-30)
+
+
+### Bug Fixes
+
+* base implementation ([5adb60d](https://github.com/wakflo/wakflo-go/commit/5adb60d3843500600d71640229c28a51949ad23d))
+
 ## [1.0.1](https://github.com/wakflo/wakflo-go/compare/v1.0.0...v1.0.1) (2023-08-29)
 
 
