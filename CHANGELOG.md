@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.3](https://github.com/wakflo/wakflo-go/compare/v1.0.2...v1.0.3) (2023-09-04)
+
+
+### Bug Fixes
+
+* fixed return type issues ([1c351d4](https://github.com/wakflo/wakflo-go/commit/1c351d48d1ec5981f82d94faf54774a641561fd6))
+* fixed return type issues ([9e29d1d](https://github.com/wakflo/wakflo-go/commit/9e29d1dc7606972fb729b6d8213c967ca9a2c1c4))
+
 ## [1.0.2](https://github.com/wakflo/wakflo-go/compare/v1.0.1...v1.0.2) (2023-08-30)
 
 
