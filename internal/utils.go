@@ -5,7 +5,8 @@ import "unsafe"
 // PtrToString returns a string from WebAssembly compatible numeric types
 // representing its pointer and length.
 func PtrToString(ptr uint32, size uint32) string {
-	return unsafe.String((*byte)(unsafe.Pointer(uintptr(ptr))), size)
+	//return unsafe.String((*byte)(unsafe.Pointer(uintptr(ptr))), size)
+	return ""
 }
 
 // StringToPtr returns a pointer and size pair for the given string in a way
