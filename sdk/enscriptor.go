@@ -1,26 +1,23 @@
 package sdk
 
 import (
-	"github.com/vmihailenco/msgpack/v5"
-	"reflect"
+	"fmt"
+
 	"unsafe"
 )
 
-func ExecutePlugin(fn PluginFn) func(ptr uint32) {
-	size := uintptr(4)
-
-	return func(ptr uint32) {
-		var b []byte
-		s := (*reflect.SliceHeader)(unsafe.Pointer(&b))
-		s.Len = int(size)
-		s.Data = uintptr(ptr)
-
+func ExecutePlugin(fn PluginFn) func(ptr int32, size *int32) int32 {
+	return func(ptr int32, size *int32) int32 {
+		arr := unsafe.Slice(size, ptr)
+		fmt.Println("Helloo")
+		fmt.Println(arr)
 		var ctx TaskContext
-		err := msgpack.Unmarshal(b, &ctx)
-		if err != nil {
-			panic(err)
-		}
+		//err := msgpack.Unmarshal(b, &ctx)
+		//if err != nil {
+		//	panic(err)
+		//}
 
 		fn(ctx)
+		return 0
 	}
 }
