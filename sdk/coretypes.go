@@ -1,3 +1,4 @@
+// Package sdk core sdk types
 package sdk
 
 // //go:generate msgp
@@ -7,6 +8,7 @@ package sdk
 // JobProcessStatus enum definition.
 type JobProcessStatus string
 
+// JobProcessStatus enum types
 const (
 	Running   JobProcessStatus = "Running"
 	Pending   JobProcessStatus = "Pending"
@@ -75,7 +77,7 @@ type SystemActivityLog struct {
 
 // TaskStepState .
 type TaskStepState struct {
-	TaskId string `json:"task_id" msg:"task_id"`
+	TaskID string `json:"task_id" msg:"task_id"`
 
 	Input map[string]interface{} `json:"input" msg:"input"`
 
@@ -88,8 +90,8 @@ type TaskStepState struct {
 
 // WorkflowInstance .
 type WorkflowInstance struct {
-	Id         string `json:"id" msg:"id"`
-	WorkflowId string `json:"workflow_id" msg:"workflow_id"`
+	ID         string `json:"id" msg:"id"`
+	WorkflowID string `json:"workflow_id" msg:"workflow_id"`
 }
 
 // Task .
@@ -151,4 +153,5 @@ type TaskStepData struct {
 	Properties TaskProperties `json:"properties" msg:"properties"`
 }
 
+// PluginFn helper type for plugin function
 type PluginFn = func(ctx TaskContext) TaskResult

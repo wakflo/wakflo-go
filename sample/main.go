@@ -1,3 +1,4 @@
+// Sample demo go plugin
 package main
 
 import (
@@ -5,7 +6,7 @@ import (
 )
 
 // PluginFn write your plugin here
-func PluginFn(ctx sdk.TaskContext) sdk.TaskResult {
+func PluginFn(_ sdk.TaskContext) sdk.TaskResult {
 	msg := "Hello, World!"
 
 	// update output
