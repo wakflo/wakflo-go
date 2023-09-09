@@ -800,15 +800,15 @@ func (z *TaskContext) DecodeMsg(dc *msgp.Reader) (err error) {
 				}
 				switch msgp.UnsafeString(field) {
 				case "id":
-					z.Job.Id, err = dc.ReadString()
+					z.Job.ID, err = dc.ReadString()
 					if err != nil {
-						err = msgp.WrapError(err, "Job", "Id")
+						err = msgp.WrapError(err, "Job", "ID")
 						return
 					}
 				case "workflow_id":
-					z.Job.WorkflowId, err = dc.ReadString()
+					z.Job.WorkflowID, err = dc.ReadString()
 					if err != nil {
-						err = msgp.WrapError(err, "Job", "WorkflowId")
+						err = msgp.WrapError(err, "Job", "WorkflowID")
 						return
 					}
 				default:
@@ -1014,9 +1014,9 @@ func (z *TaskContext) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.Job.Id)
+	err = en.WriteString(z.Job.ID)
 	if err != nil {
-		err = msgp.WrapError(err, "Job", "Id")
+		err = msgp.WrapError(err, "Job", "ID")
 		return
 	}
 	// write "workflow_id"
@@ -1024,9 +1024,9 @@ func (z *TaskContext) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.Job.WorkflowId)
+	err = en.WriteString(z.Job.WorkflowID)
 	if err != nil {
-		err = msgp.WrapError(err, "Job", "WorkflowId")
+		err = msgp.WrapError(err, "Job", "WorkflowID")
 		return
 	}
 	// write "step"
@@ -1147,10 +1147,10 @@ func (z *TaskContext) MarshalMsg(b []byte) (o []byte, err error) {
 	// map header, size 2
 	// string "id"
 	o = append(o, 0x82, 0xa2, 0x69, 0x64)
-	o = msgp.AppendString(o, z.Job.Id)
+	o = msgp.AppendString(o, z.Job.ID)
 	// string "workflow_id"
 	o = append(o, 0xab, 0x77, 0x6f, 0x72, 0x6b, 0x66, 0x6c, 0x6f, 0x77, 0x5f, 0x69, 0x64)
-	o = msgp.AppendString(o, z.Job.WorkflowId)
+	o = msgp.AppendString(o, z.Job.WorkflowID)
 	// string "step"
 	o = append(o, 0xa4, 0x73, 0x74, 0x65, 0x70)
 	o, err = z.Step.MarshalMsg(o)
@@ -1355,15 +1355,15 @@ func (z *TaskContext) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				}
 				switch msgp.UnsafeString(field) {
 				case "id":
-					z.Job.Id, bts, err = msgp.ReadStringBytes(bts)
+					z.Job.ID, bts, err = msgp.ReadStringBytes(bts)
 					if err != nil {
-						err = msgp.WrapError(err, "Job", "Id")
+						err = msgp.WrapError(err, "Job", "ID")
 						return
 					}
 				case "workflow_id":
-					z.Job.WorkflowId, bts, err = msgp.ReadStringBytes(bts)
+					z.Job.WorkflowID, bts, err = msgp.ReadStringBytes(bts)
 					if err != nil {
-						err = msgp.WrapError(err, "Job", "WorkflowId")
+						err = msgp.WrapError(err, "Job", "WorkflowID")
 						return
 					}
 				default:
@@ -1480,7 +1480,7 @@ func (z *TaskContext) Msgsize() (s int) {
 			s += msgp.StringPrefixSize + len(za0005) + msgp.GuessSize(za0006)
 		}
 	}
-	s += 4 + 1 + 3 + msgp.StringPrefixSize + len(z.Job.Id) + 12 + msgp.StringPrefixSize + len(z.Job.WorkflowId) + 5 + z.Step.Msgsize() + 9 + 1 + 3 + msgp.StringPrefixSize + len(z.Workflow.ID) + 5 + msgp.StringPrefixSize + len(z.Workflow.Name) + 9 + msgp.Int64Size + 5 + z.Task.Msgsize()
+	s += 4 + 1 + 3 + msgp.StringPrefixSize + len(z.Job.ID) + 12 + msgp.StringPrefixSize + len(z.Job.WorkflowID) + 5 + z.Step.Msgsize() + 9 + 1 + 3 + msgp.StringPrefixSize + len(z.Workflow.ID) + 5 + msgp.StringPrefixSize + len(z.Workflow.Name) + 9 + msgp.Int64Size + 5 + z.Task.Msgsize()
 	return
 }
 
@@ -2534,9 +2534,9 @@ func (z *TaskStepState) DecodeMsg(dc *msgp.Reader) (err error) {
 		}
 		switch msgp.UnsafeString(field) {
 		case "task_id":
-			z.TaskId, err = dc.ReadString()
+			z.TaskID, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "TaskId")
+				err = msgp.WrapError(err, "TaskID")
 				return
 			}
 		case "input":
@@ -2647,9 +2647,9 @@ func (z *TaskStepState) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.TaskId)
+	err = en.WriteString(z.TaskID)
 	if err != nil {
-		err = msgp.WrapError(err, "TaskId")
+		err = msgp.WrapError(err, "TaskID")
 		return
 	}
 	// write "input"
@@ -2732,7 +2732,7 @@ func (z *TaskStepState) MarshalMsg(b []byte) (o []byte, err error) {
 	// map header, size 5
 	// string "task_id"
 	o = append(o, 0x85, 0xa7, 0x74, 0x61, 0x73, 0x6b, 0x5f, 0x69, 0x64)
-	o = msgp.AppendString(o, z.TaskId)
+	o = msgp.AppendString(o, z.TaskID)
 	// string "input"
 	o = append(o, 0xa5, 0x69, 0x6e, 0x70, 0x75, 0x74)
 	o = msgp.AppendMapHeader(o, uint32(len(z.Input)))
@@ -2790,9 +2790,9 @@ func (z *TaskStepState) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		}
 		switch msgp.UnsafeString(field) {
 		case "task_id":
-			z.TaskId, bts, err = msgp.ReadStringBytes(bts)
+			z.TaskID, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "TaskId")
+				err = msgp.WrapError(err, "TaskID")
 				return
 			}
 		case "input":
@@ -2898,7 +2898,7 @@ func (z *TaskStepState) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z *TaskStepState) Msgsize() (s int) {
-	s = 1 + 8 + msgp.StringPrefixSize + len(z.TaskId) + 6 + msgp.MapHeaderSize
+	s = 1 + 8 + msgp.StringPrefixSize + len(z.TaskID) + 6 + msgp.MapHeaderSize
 	if z.Input != nil {
 		for za0001, za0002 := range z.Input {
 			_ = za0002
@@ -3092,15 +3092,15 @@ func (z *WorkflowInstance) DecodeMsg(dc *msgp.Reader) (err error) {
 		}
 		switch msgp.UnsafeString(field) {
 		case "id":
-			z.Id, err = dc.ReadString()
+			z.ID, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "Id")
+				err = msgp.WrapError(err, "ID")
 				return
 			}
 		case "workflow_id":
-			z.WorkflowId, err = dc.ReadString()
+			z.WorkflowID, err = dc.ReadString()
 			if err != nil {
-				err = msgp.WrapError(err, "WorkflowId")
+				err = msgp.WrapError(err, "WorkflowID")
 				return
 			}
 		default:
@@ -3122,9 +3122,9 @@ func (z WorkflowInstance) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.Id)
+	err = en.WriteString(z.ID)
 	if err != nil {
-		err = msgp.WrapError(err, "Id")
+		err = msgp.WrapError(err, "ID")
 		return
 	}
 	// write "workflow_id"
@@ -3132,9 +3132,9 @@ func (z WorkflowInstance) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	err = en.WriteString(z.WorkflowId)
+	err = en.WriteString(z.WorkflowID)
 	if err != nil {
-		err = msgp.WrapError(err, "WorkflowId")
+		err = msgp.WrapError(err, "WorkflowID")
 		return
 	}
 	return
@@ -3146,10 +3146,10 @@ func (z WorkflowInstance) MarshalMsg(b []byte) (o []byte, err error) {
 	// map header, size 2
 	// string "id"
 	o = append(o, 0x82, 0xa2, 0x69, 0x64)
-	o = msgp.AppendString(o, z.Id)
+	o = msgp.AppendString(o, z.ID)
 	// string "workflow_id"
 	o = append(o, 0xab, 0x77, 0x6f, 0x72, 0x6b, 0x66, 0x6c, 0x6f, 0x77, 0x5f, 0x69, 0x64)
-	o = msgp.AppendString(o, z.WorkflowId)
+	o = msgp.AppendString(o, z.WorkflowID)
 	return
 }
 
@@ -3172,15 +3172,15 @@ func (z *WorkflowInstance) UnmarshalMsg(bts []byte) (o []byte, err error) {
 		}
 		switch msgp.UnsafeString(field) {
 		case "id":
-			z.Id, bts, err = msgp.ReadStringBytes(bts)
+			z.ID, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "Id")
+				err = msgp.WrapError(err, "ID")
 				return
 			}
 		case "workflow_id":
-			z.WorkflowId, bts, err = msgp.ReadStringBytes(bts)
+			z.WorkflowID, bts, err = msgp.ReadStringBytes(bts)
 			if err != nil {
-				err = msgp.WrapError(err, "WorkflowId")
+				err = msgp.WrapError(err, "WorkflowID")
 				return
 			}
 		default:
@@ -3197,6 +3197,6 @@ func (z *WorkflowInstance) UnmarshalMsg(bts []byte) (o []byte, err error) {
 
 // Msgsize returns an upper bound estimate of the number of bytes occupied by the serialized message
 func (z WorkflowInstance) Msgsize() (s int) {
-	s = 1 + 3 + msgp.StringPrefixSize + len(z.Id) + 12 + msgp.StringPrefixSize + len(z.WorkflowId)
+	s = 1 + 3 + msgp.StringPrefixSize + len(z.ID) + 12 + msgp.StringPrefixSize + len(z.WorkflowID)
 	return
 }
