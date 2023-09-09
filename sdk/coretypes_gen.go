@@ -1563,46 +1563,34 @@ func (z *TaskProperties) DecodeMsg(dc *msgp.Reader) (err error) {
 				z.Output[za0003] = za0004
 			}
 		case "authentication":
-			if dc.IsNil() {
-				err = dc.ReadNil()
+			var zb0004 uint32
+			zb0004, err = dc.ReadMapHeader()
+			if err != nil {
+				err = msgp.WrapError(err, "Authentication")
+				return
+			}
+			if z.Authentication == nil {
+				z.Authentication = make(map[string]interface{}, zb0004)
+			} else if len(z.Authentication) > 0 {
+				for key := range z.Authentication {
+					delete(z.Authentication, key)
+				}
+			}
+			for zb0004 > 0 {
+				zb0004--
+				var za0005 string
+				var za0006 interface{}
+				za0005, err = dc.ReadString()
 				if err != nil {
 					err = msgp.WrapError(err, "Authentication")
 					return
 				}
-				z.Authentication = nil
-			} else {
-				if z.Authentication == nil {
-					z.Authentication = new(map[string]interface{})
-				}
-				var zb0004 uint32
-				zb0004, err = dc.ReadMapHeader()
+				za0006, err = dc.ReadIntf()
 				if err != nil {
-					err = msgp.WrapError(err, "Authentication")
+					err = msgp.WrapError(err, "Authentication", za0005)
 					return
 				}
-				if *z.Authentication == nil {
-					*z.Authentication = make(map[string]interface{}, zb0004)
-				} else if len(*z.Authentication) > 0 {
-					for key := range *z.Authentication {
-						delete(*z.Authentication, key)
-					}
-				}
-				for zb0004 > 0 {
-					zb0004--
-					var za0005 string
-					var za0006 interface{}
-					za0005, err = dc.ReadString()
-					if err != nil {
-						err = msgp.WrapError(err, "Authentication")
-						return
-					}
-					za0006, err = dc.ReadIntf()
-					if err != nil {
-						err = msgp.WrapError(err, "Authentication", za0005)
-						return
-					}
-					*z.Authentication[za0005] = za0006
-				}
+				z.Authentication[za0005] = za0006
 			}
 		default:
 			err = dc.Skip()
@@ -1667,28 +1655,21 @@ func (z *TaskProperties) EncodeMsg(en *msgp.Writer) (err error) {
 	if err != nil {
 		return
 	}
-	if z.Authentication == nil {
-		err = en.WriteNil()
-		if err != nil {
-			return
-		}
-	} else {
-		err = en.WriteMapHeader(uint32(len(*z.Authentication)))
+	err = en.WriteMapHeader(uint32(len(z.Authentication)))
+	if err != nil {
+		err = msgp.WrapError(err, "Authentication")
+		return
+	}
+	for za0005, za0006 := range z.Authentication {
+		err = en.WriteString(za0005)
 		if err != nil {
 			err = msgp.WrapError(err, "Authentication")
 			return
 		}
-		for za0005, za0006 := range *z.Authentication {
-			err = en.WriteString(za0005)
-			if err != nil {
-				err = msgp.WrapError(err, "Authentication")
-				return
-			}
-			err = en.WriteIntf(za0006)
-			if err != nil {
-				err = msgp.WrapError(err, "Authentication", za0005)
-				return
-			}
+		err = en.WriteIntf(za0006)
+		if err != nil {
+			err = msgp.WrapError(err, "Authentication", za0005)
+			return
 		}
 	}
 	return
@@ -1722,17 +1703,13 @@ func (z *TaskProperties) MarshalMsg(b []byte) (o []byte, err error) {
 	}
 	// string "authentication"
 	o = append(o, 0xae, 0x61, 0x75, 0x74, 0x68, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e)
-	if z.Authentication == nil {
-		o = msgp.AppendNil(o)
-	} else {
-		o = msgp.AppendMapHeader(o, uint32(len(*z.Authentication)))
-		for za0005, za0006 := range *z.Authentication {
-			o = msgp.AppendString(o, za0005)
-			o, err = msgp.AppendIntf(o, za0006)
-			if err != nil {
-				err = msgp.WrapError(err, "Authentication", za0005)
-				return
-			}
+	o = msgp.AppendMapHeader(o, uint32(len(z.Authentication)))
+	for za0005, za0006 := range z.Authentication {
+		o = msgp.AppendString(o, za0005)
+		o, err = msgp.AppendIntf(o, za0006)
+		if err != nil {
+			err = msgp.WrapError(err, "Authentication", za0005)
+			return
 		}
 	}
 	return
@@ -1817,45 +1794,34 @@ func (z *TaskProperties) UnmarshalMsg(bts []byte) (o []byte, err error) {
 				z.Output[za0003] = za0004
 			}
 		case "authentication":
-			if msgp.IsNil(bts) {
-				bts, err = msgp.ReadNilBytes(bts)
-				if err != nil {
-					return
+			var zb0004 uint32
+			zb0004, bts, err = msgp.ReadMapHeaderBytes(bts)
+			if err != nil {
+				err = msgp.WrapError(err, "Authentication")
+				return
+			}
+			if z.Authentication == nil {
+				z.Authentication = make(map[string]interface{}, zb0004)
+			} else if len(z.Authentication) > 0 {
+				for key := range z.Authentication {
+					delete(z.Authentication, key)
 				}
-				z.Authentication = nil
-			} else {
-				if z.Authentication == nil {
-					z.Authentication = new(map[string]interface{})
-				}
-				var zb0004 uint32
-				zb0004, bts, err = msgp.ReadMapHeaderBytes(bts)
+			}
+			for zb0004 > 0 {
+				var za0005 string
+				var za0006 interface{}
+				zb0004--
+				za0005, bts, err = msgp.ReadStringBytes(bts)
 				if err != nil {
 					err = msgp.WrapError(err, "Authentication")
 					return
 				}
-				if *z.Authentication == nil {
-					*z.Authentication = make(map[string]interface{}, zb0004)
-				} else if len(*z.Authentication) > 0 {
-					for key := range *z.Authentication {
-						delete(*z.Authentication, key)
-					}
+				za0006, bts, err = msgp.ReadIntfBytes(bts)
+				if err != nil {
+					err = msgp.WrapError(err, "Authentication", za0005)
+					return
 				}
-				for zb0004 > 0 {
-					var za0005 string
-					var za0006 interface{}
-					zb0004--
-					za0005, bts, err = msgp.ReadStringBytes(bts)
-					if err != nil {
-						err = msgp.WrapError(err, "Authentication")
-						return
-					}
-					za0006, bts, err = msgp.ReadIntfBytes(bts)
-					if err != nil {
-						err = msgp.WrapError(err, "Authentication", za0005)
-						return
-					}
-					*z.Authentication[za0005] = za0006
-				}
+				z.Authentication[za0005] = za0006
 			}
 		default:
 			bts, err = msgp.Skip(bts)
@@ -1885,16 +1851,11 @@ func (z *TaskProperties) Msgsize() (s int) {
 			s += msgp.StringPrefixSize + len(za0003) + msgp.GuessSize(za0004)
 		}
 	}
-	s += 15
-	if z.Authentication == nil {
-		s += msgp.NilSize
-	} else {
-		s += msgp.MapHeaderSize
-		if *z.Authentication != nil {
-			for za0005, za0006 := range *z.Authentication {
-				_ = za0006
-				s += msgp.StringPrefixSize + len(za0005) + msgp.GuessSize(za0006)
-			}
+	s += 15 + msgp.MapHeaderSize
+	if z.Authentication != nil {
+		for za0005, za0006 := range z.Authentication {
+			_ = za0006
+			s += msgp.StringPrefixSize + len(za0005) + msgp.GuessSize(za0006)
 		}
 	}
 	return

@@ -141,7 +141,7 @@ type TaskProperties struct {
 	// Output of the schema
 	Output map[string]interface{} `json:"output" msg:"output"`
 	// Authentication of the schema
-	Authentication *map[string]interface{} `json:"authentication" msg:"authentication"`
+	Authentication map[string]interface{} `json:"authentication" msg:"authentication"`
 }
 
 // TaskStepData .
