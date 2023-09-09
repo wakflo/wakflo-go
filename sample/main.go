@@ -1,20 +1,34 @@
 package main
 
 import (
-	"fmt"
 	"github.com/wakflo/wakflo-go/sdk"
 )
 
-//go:wasm-module execute
-//go:export main
-func execute(ptr int32, size *int32) int32 {
-	// Yay!!! you can start hacking
-	return sdk.ExecutePlugin(func(ctx sdk.TaskContext) sdk.TaskResult {
-		// write here
-		fmt.Println("Hello, World!")
-		return sdk.TaskResult{}
-	})(ptr, size)
+// PluginFn write your plugin here
+func PluginFn(ctx sdk.TaskContext) sdk.TaskResult {
+	msg := "Hello, World!"
+
+	// update output
+	return sdk.TaskResult{
+		Output: map[string]interface{}{
+			"message": msg,
+		},
+		Errors: make([]sdk.SystemActivityLog, 0),
+	}
 }
 
+//--------------------------------------DO NOT MODIFY BELOW ------------------------------------//
+
+// DO NOT MODIFY
+//
+//go:wasm-module execute
+//go:export main
+func execute(ptr *int32) *int32 {
+	return sdk.ExecutePlugin(PluginFn)(ptr)
+}
+
+// DO NOT MODIFY
 // main .
 func main() {}
+
+//--------------------------------------DO NOT MODIFY ABOVE ------------------------------------//

@@ -2,22 +2,32 @@ package sdk
 
 import (
 	"fmt"
-
-	"unsafe"
+	"github.com/wakflo/wakflo-go/internal"
 )
 
-func ExecutePlugin(fn PluginFn) func(ptr int32, size *int32) int32 {
-	return func(ptr int32, size *int32) int32 {
-		arr := unsafe.Slice(size, ptr)
-		fmt.Println("Helloo")
-		fmt.Println(arr)
+func ExecutePlugin(fn PluginFn) func(ptr *int32) *int32 {
+	return func(ptr *int32) *int32 {
+		inputBytes := internal.PointerToBytes(ptr)
 		var ctx TaskContext
-		//err := msgpack.Unmarshal(b, &ctx)
-		//if err != nil {
-		//	panic(err)
-		//}
+		_, err := ctx.UnmarshalMsg(inputBytes)
+		if err != nil {
+			panic(err)
+		}
 
-		fn(ctx)
-		return 0
+		// call function
+		rsp := fn(ctx)
+
+		// process output
+		outputBytes, err := rsp.MarshalMsg(nil)
+		if err != nil {
+			fmt.Println("*****************", err)
+			panic(err)
+		}
+
+		fmt.Println("*****************")
+		fmt.Println(string(outputBytes[:]))
+		fmt.Println("*****************")
+
+		return internal.BytesToPointer(outputBytes)
 	}
 }
