@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.4](https://github.com/wakflo/wakflo-go/compare/v1.0.3...v1.0.4) (2023-09-09)
+
+
+### Bug Fixes
+
+* fixed return type issues ([9638c69](https://github.com/wakflo/wakflo-go/commit/9638c695e4718dfc7845b1a3e80af6386f53104a))
+* fixed return type issues ([dcb05ef](https://github.com/wakflo/wakflo-go/commit/dcb05ef3e1408884054006f1020e195c40ccb7a7))
+* fixed return type issues ([97b9ee8](https://github.com/wakflo/wakflo-go/commit/97b9ee852c3fd5e465889d3baad5984a0f15c713))
+* fixed return type issues ([676558b](https://github.com/wakflo/wakflo-go/commit/676558b3be2b6464e1972b53898b838989ba7cf6))
+* fixed return type issues ([617e8dd](https://github.com/wakflo/wakflo-go/commit/617e8dd1e271b1332240412f8085c2ca4e94f704))
+* fixed return type issues ([905dbcc](https://github.com/wakflo/wakflo-go/commit/905dbcc64001b33740a3a55bb5297c49ddfb2d62))
+
 ## [1.0.3](https://github.com/wakflo/wakflo-go/compare/v1.0.2...v1.0.3) (2023-09-04)
 
 
